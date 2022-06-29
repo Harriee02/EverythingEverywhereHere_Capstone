@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
+
+    <ImageView
+        android:id="@+id/productImgResult"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txtProductDescriptionResult"
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/productImgResult"
+        android:hint="Description" />
+
+    <ImageView
+        android:id="@+id/imageView3Result"
+        android:layout_width="20dp"
+        android:layout_height="21dp"
+        android:layout_below="@+id/txtProductDescriptionResult"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/productImgResult"
+        android:src="@android:drawable/btn_star" />
+
+
+    <TextView
+        android:id="@+id/txtRatingsResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtProductDescriptionResult"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/imageView3Result"
+        android:hint="Ratings" />
+
+    <TextView
+        android:id="@+id/txtPriceResult"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRatingsResult"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/productImgResult"
+        android:hint="$Price" />
+
+    <TextView
+        android:id="@+id/txtFromStoreResult"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtProductDescriptionResult"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="1dp"
+        android:hint="Store" />
+
+</RelativeLayout>

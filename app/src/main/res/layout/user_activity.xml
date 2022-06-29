@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="4dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="155dp"
+        android:layout_height="155dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="94dp"
+        android:layout_marginEnd="241dp"
+        app:cardCornerRadius="150dp">
+
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="119dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="261dp"
+        app:srcCompat="@drawable/ic_baseline_person_grey_24" />
+
+    <TextView
+        android:id="@+id/textEmail"
+        android:layout_width="65dp"
+        android:layout_height="49dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="341dp"
+        android:gravity="center"
+        android:text="Email:" />
+
+    <TextView
+        android:id="@+id/txtWrittenEmail"
+        android:layout_width="331dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-59dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="3dp"
+        android:gravity="center|left"
+        android:hint="Email goes here"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/txtWrittenPassword"
+        android:layout_width="87dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/textEmail"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="320dp"
+        android:gravity="center"
+        android:text="Password:" />
+
+    <TextView
+        android:id="@+id/txtHiddenPassword"
+        android:layout_width="309dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/txtWrittenEmail"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="0dp"
+        android:gravity="center|left"
+        android:hint="****************"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtHiddenPassword"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="45dp"
+        android:backgroundTint="#97886e"
+        android:text="CHANGE EMAIL"
+        android:textColor="#F4F1F1" />
+
+    <Button
+        android:id="@+id/signupBtn"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="45dp"
+        android:backgroundTint="#97886e"
+        android:text="CHANGE PASSWORD"
+        android:textColor="#F6F6F5" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signupBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="45dp"
+        android:backgroundTint="#efeece"
+        android:text="LOG OUT"
+        android:textColor="#75571A" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        app:menu="@menu/menu_bottom_navigation" />
+</RelativeLayout>
