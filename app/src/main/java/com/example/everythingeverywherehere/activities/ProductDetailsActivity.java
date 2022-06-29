@@ -1,6 +1,5 @@
-package com.example.everythingeverywherehere;
+package com.example.everythingeverywherehere.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -11,12 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.everythingeverywherehere.ProductModel;
+import com.example.everythingeverywherehere.R;
 
 import org.parceler.Parcels;
 
-import java.util.List;
-
-public class ProductDetails extends AppCompatActivity {
+public class ProductDetailsActivity extends AppCompatActivity {
     public static final String TAG = "PRODUCT_DETAILS";
     ProductModel productModel;
     ImageView productDetailsImg;
@@ -47,7 +46,7 @@ public class ProductDetails extends AppCompatActivity {
         hyperLink.setText(productModel.getLink());
         String imageUrl = productModel.getImage();
         if (imageUrl != null) {
-            Glide.with(ProductDetails.this)
+            Glide.with(ProductDetailsActivity.this)
                     .load(imageUrl)
                     .into(productDetailsImg);
         }

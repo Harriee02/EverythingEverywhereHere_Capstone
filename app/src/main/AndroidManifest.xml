@@ -18,7 +18,7 @@
         android:theme="@style/Theme.EverythingEverywhereHere"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,14 +26,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".activities.HomeActivity">
         </activity>
-        <activity android:name=".UserActivity">
+        <activity android:name=".activities.UserActivity">
         </activity>
-        <activity android:name=".ProductDetails"></activity>
-        <activity android:name=".ResultActivity"></activity>
-        <activity android:name=".ProductDetailsResult"></activity>
-        <activity android:name=".SearchActivity"
+        <activity android:name=".activities.ProductDetailsActivity"></activity>
+        <activity android:name=".activities.ResultActivity"></activity>
+        <activity android:name=".activities.ProductDetailsResultActivity"></activity>
+        <activity android:name=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".activities.SearchActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
 

@@ -1,14 +1,9 @@
-package com.example.everythingeverywherehere;
-
-import android.app.Activity;
+package com.example.everythingeverywherehere.activities;
 
 //package com.example.everythingeverywherehere;
 //
-import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
+        import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -18,32 +13,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.everythingeverywherehere.DataBaseHelper;
+import com.example.everythingeverywherehere.ProductModel;
 import com.example.everythingeverywherehere.R;
+import com.example.everythingeverywherehere.adapters.ResultAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
+        import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.parceler.Parcels;
+        import org.parceler.Parcels;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
+        import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+        import java.util.List;
 
 //
 public class ResultActivity extends AppCompatActivity {

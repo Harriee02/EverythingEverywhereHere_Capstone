@@ -1,4 +1,4 @@
-package com.example.everythingeverywherehere;
+package com.example.everythingeverywherehere.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.everythingeverywherehere.activities.ProductDetailsResultActivity;
+import com.example.everythingeverywherehere.ProductModel;
+import com.example.everythingeverywherehere.R;
 
 import org.parceler.Parcels;
 
@@ -81,7 +83,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ProductDetailsResult.class);
+                    Intent intent = new Intent(context, ProductDetailsResultActivity.class);
                     intent.putExtra("harry", Parcels.wrap(product));
                     context.startActivity(intent);
                 }

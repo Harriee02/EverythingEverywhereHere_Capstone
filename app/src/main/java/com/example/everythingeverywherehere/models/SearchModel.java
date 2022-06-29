@@ -1,4 +1,4 @@
-package com.example.everythingeverywherehere;
+package com.example.everythingeverywherehere.models;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

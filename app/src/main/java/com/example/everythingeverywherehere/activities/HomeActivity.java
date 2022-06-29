@@ -1,4 +1,4 @@
-package com.example.everythingeverywherehere;
+package com.example.everythingeverywherehere.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.example.everythingeverywherehere.DataBaseHelper;
+import com.example.everythingeverywherehere.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.parceler.Parcels;

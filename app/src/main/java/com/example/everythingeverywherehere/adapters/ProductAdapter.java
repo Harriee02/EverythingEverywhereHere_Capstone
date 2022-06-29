@@ -1,10 +1,7 @@
-package com.example.everythingeverywherehere;
+package com.example.everythingeverywherehere.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.media.Rating;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.everythingeverywherehere.activities.ProductDetailsActivity;
+import com.example.everythingeverywherehere.ProductModel;
+import com.example.everythingeverywherehere.R;
 
-import org.json.JSONException;
 import org.parceler.Parcels;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     Context context;
@@ -90,7 +83,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ProductDetails.class);
+                    Intent intent = new Intent(context, ProductDetailsActivity.class);
                     intent.putExtra("harrie", Parcels.wrap(product));
                     context.startActivity(intent);
                 }
