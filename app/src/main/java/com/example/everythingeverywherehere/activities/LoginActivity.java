@@ -2,9 +2,12 @@ package com.example.everythingeverywherehere.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passWord;
     Button loginBtn;
     Button signupBtn;
+    CheckBox checkBoxShowPwd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +37,17 @@ public class LoginActivity extends AppCompatActivity {
         }
         eMail = findViewById(R.id.txtEmail);
         passWord = findViewById(R.id.txtPassword);
+        passWord.setTransformationMethod(new PasswordTransformationMethod());
+        checkBoxShowPwd = findViewById(R.id.checkBoxShowPwd);
+        checkBoxShowPwd.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
+                if (isChecked) {
+                    passWord.setTransformationMethod(null); // Show password when box checked
+                } else {
+                    passWord.setTransformationMethod(new PasswordTransformationMethod()); // Hide password when box not checked
+                }
+            }
+        } );
         loginBtn = findViewById(R.id.loginBtn);
         signupBtn = findViewById(R.id.signupBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {

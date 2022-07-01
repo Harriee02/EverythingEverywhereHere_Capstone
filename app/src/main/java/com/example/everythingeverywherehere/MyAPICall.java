@@ -17,7 +17,7 @@ public interface MyAPICall {
 
 //    @GET("v3/267287c0-805f-414c-9f89-f82d7b8cfb86")//v3/c38ef967-0c43-4cbb-b4a0-1f330e2d33b7
 
-    @GET("request?api_key=253F8FAC12FB4EDE9DC529D9A16B4365&type=search&amazon_domain=amazon.com")
+    @GET("request?api_key=F4C9F162657A40F6A9D9B584C059E855&type=search&amazon_domain=amazon.com")
     Call<ResponseBody> getProducts(
             @QueryMap Map<String, Object> map
     );

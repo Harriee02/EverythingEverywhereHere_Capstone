@@ -30,6 +30,7 @@
 
     <TextView
         android:id="@+id/textEmail"
+        android:fontFamily="serif-monospace"
         android:layout_width="65dp"
         android:layout_height="49dp"
         android:layout_below="@+id/imageView2"
@@ -43,6 +44,7 @@
 
     <TextView
         android:id="@+id/txtWrittenEmail"
+        android:fontFamily="serif-monospace"
         android:layout_width="331dp"
         android:layout_height="50dp"
         android:layout_below="@+id/imageView2"
@@ -56,6 +58,7 @@
 
     <TextView
         android:id="@+id/txtWrittenPassword"
+        android:fontFamily="serif-monospace"
         android:layout_width="87dp"
         android:layout_height="48dp"
         android:layout_below="@+id/textEmail"
@@ -67,6 +70,7 @@
 
     <TextView
         android:id="@+id/txtHiddenPassword"
+        android:fontFamily="serif-monospace"
         android:layout_width="309dp"
         android:layout_height="50dp"
         android:layout_below="@+id/txtWrittenEmail"
@@ -79,6 +83,7 @@
 
     <Button
         android:id="@+id/loginBtn"
+        android:fontFamily="serif-monospace"
         android:layout_width="408dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtHiddenPassword"
@@ -88,11 +93,13 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="45dp"
         android:backgroundTint="#97886e"
+        android:textColor="#F4F1F1"
         android:text="CHANGE EMAIL"
-        android:textColor="#F4F1F1" />
+         />
 
     <Button
         android:id="@+id/signupBtn"
+        android:fontFamily="serif-monospace"
         android:layout_width="408dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginBtn"
@@ -107,6 +114,7 @@
 
     <Button
         android:id="@+id/logoutBtn"
+        android:fontFamily="serif-monospace"
         android:layout_width="408dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signupBtn"
@@ -116,7 +124,8 @@
         android:layout_marginTop="69dp"
         android:layout_marginEnd="45dp"
         android:backgroundTint="#efeece"
+        android:textColor="#75571A"
         android:text="LOG OUT"
-        android:textColor="#75571A" />
+         />
 
 </RelativeLayout>

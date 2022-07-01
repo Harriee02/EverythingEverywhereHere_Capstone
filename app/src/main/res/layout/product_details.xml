@@ -25,6 +25,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="0dp"
+        android:fontFamily="serif-monospace"
         android:hint="description.." />
 
     <RatingBar
@@ -45,11 +46,16 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="297dp"
+        android:fontFamily="serif-monospace"
         android:hint="ratingValue"
-        android:textSize="20sp" />
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/productDetailsPrice"
+        android:fontFamily="serif-monospace"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/productDetailsRatingValue"
@@ -57,17 +63,15 @@
         android:hint="Price"
         android:textSize="26sp" />
 
-    <TextView
-        android:id="@+id/hyperLink"
+    <Button
+        android:id="@+id/buyNowBtn"
         android:layout_width="match_parent"
-        android:layout_height="199dp"
+        android:layout_height="65dp"
         android:layout_below="@+id/productDetailsPrice"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="0dp"
-        android:autoLink="web"
-        android:textColor="#F1E57D" />
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#efeece"
+        android:textColor="#75571A"
+        android:fontFamily="serif-monospace"
+        android:text="BUY NOW" />
 
 </RelativeLayout>

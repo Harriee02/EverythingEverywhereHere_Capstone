@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.everythingeverywherehere.R;
 import com.example.everythingeverywherehere.activities.LoginActivity;
-import com.example.everythingeverywherehere.activities.UserActivity;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;

@@ -13,42 +13,36 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.everythingeverywherehere.DataBaseHelper;
 import com.example.everythingeverywherehere.R;
-import com.example.everythingeverywherehere.activities.HomeActivity;
 import com.example.everythingeverywherehere.activities.ResultActivity;
+import com.example.everythingeverywherehere.adapters.HomeListAdapter;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
     RecyclerView homeRecyclerView;
-    ListView listView;
+    List<String> items;
+    HomeListAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_home, container, false);
         homeRecyclerView = v.findViewById(R.id.homeRecyclerView);
-        listView = v.findViewById(R.id.listView);
+        items = new ArrayList<>();
+        adapter = new HomeListAdapter(getActivity(), items);
+        homeRecyclerView.setAdapter(adapter);
+        homeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         List<String> everyProduct = dataBaseHelper.getkeyWord();
-        Log.i("HOME", "bye " + everyProduct);
-        ArrayAdapter<String> arr;
-        arr = new ArrayAdapter<String>(getActivity(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, everyProduct);
-        listView.setAdapter(arr);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getActivity(), ResultActivity.class);
-                String selectedFromList = (String) (listView.getItemAtPosition(position));
-                i.putExtra("keyword", Parcels.wrap(selectedFromList));
-                startActivity(i);
-
-            }
-        });
+        items.addAll(everyProduct);
+        adapter.notifyDataSetChanged();
         return v;
     }
 
