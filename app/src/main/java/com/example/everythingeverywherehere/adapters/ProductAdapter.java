@@ -67,12 +67,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             itemView.setClickable(true);
         }
 
-        public void bind(ProductModel product) {// figure out what items are been bound, whether amazon or walmart
-            if (product instanceof ProductModel){
-                //TODO
-            }
+        public void bind(ProductModel product) {
             txtProductDescription.setText(product.getTitle());
-            txtFromStore.setText("Amazon");
+            if (product.getRatings_total() == -123){
+                txtFromStore.setText("Walmart");
+            }
+            else{
+                txtFromStore.setText("Amazon");
+            }
+
             if (product.getPrice().getRaw() != null) {
                 txtPrice.setText(product.getPrice().getRaw() + " " + "USD");
             }
@@ -87,7 +90,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ProductDetailsActivity.class);
-                    intent.putExtra("harrie", Parcels.wrap(product));
+                    intent.putExtra("product details", Parcels.wrap(product));
                     context.startActivity(intent);
                 }
             });

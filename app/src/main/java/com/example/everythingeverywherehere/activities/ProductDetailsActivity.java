@@ -43,7 +43,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productDetailsPrice = findViewById(R.id.productDetailsPrice);
         productDetailsRating = findViewById(R.id.productDetailsRating);
         buyNowBtn = findViewById(R.id.buyNowBtn);
-        productModel = Parcels.unwrap(getIntent().getParcelableExtra("harrie"));
+        productModel = Parcels.unwrap(getIntent().getParcelableExtra("product details"));
         String url = productModel.getLink();
         buyNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override

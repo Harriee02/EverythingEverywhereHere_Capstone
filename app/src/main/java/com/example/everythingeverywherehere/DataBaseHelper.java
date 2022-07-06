@@ -36,12 +36,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean addProduct(String keyWord, JSONArray product) {
+    public boolean addProduct(String keyWord, String product) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_ID, keyWord);
-        cv.put(COLUMN_JSON_OBJECT, String.valueOf(product));
+        cv.put(COLUMN_JSON_OBJECT, product);
         String queryString = "SELECT * FROM " + SEARCHED_PRODUCT_TABLE;
         Cursor cursor = db.query(SEARCHED_PRODUCT_TABLE, new String[]{COLUMN_ID, COLUMN_JSON_OBJECT}, COLUMN_ID + " LIKE ?", new String[]{keyWord}, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
