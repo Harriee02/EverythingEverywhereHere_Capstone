@@ -3,15 +3,14 @@ package com.example.everythingeverywherehere.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,7 +49,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToUrl(url);
-                
+
             }
         });
         productDetailsDescription.setText(productModel.getTitle());
@@ -72,4 +71,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(i);
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
+    }
+
+
 }

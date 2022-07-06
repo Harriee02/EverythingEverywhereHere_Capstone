@@ -83,13 +83,13 @@ public class SearchFragment extends Fragment {
         return v;
     }
     private void queryProducts() {
-        progressBar.setVisibility(View.VISIBLE);
         allProducts.clear();
         searchText = searchView.getQuery().toString().toLowerCase(Locale.ROOT);
         if (searchText.length() == 0){
             Toast.makeText(getActivity(), "Product name cannot be an empty string. Populate search view!", Toast.LENGTH_SHORT).show();
             return;
         }
+        progressBar.setVisibility(View.VISIBLE);
         InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         Retrofit retrofit = new Retrofit.Builder()

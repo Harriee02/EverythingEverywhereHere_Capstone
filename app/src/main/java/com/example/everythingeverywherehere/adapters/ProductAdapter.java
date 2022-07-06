@@ -67,7 +67,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             itemView.setClickable(true);
         }
 
-        public void bind(ProductModel product) {
+        public void bind(ProductModel product) {// figure out what items are been bound, whether amazon or walmart
+            if (product instanceof ProductModel){
+                //TODO
+            }
             txtProductDescription.setText(product.getTitle());
             txtFromStore.setText("Amazon");
             if (product.getPrice().getRaw() != null) {

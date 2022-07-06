@@ -114,7 +114,6 @@
 
     <Button
         android:id="@+id/logoutBtn"
-        android:fontFamily="serif-monospace"
         android:layout_width="408dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signupBtn"
@@ -124,8 +123,8 @@
         android:layout_marginTop="69dp"
         android:layout_marginEnd="45dp"
         android:backgroundTint="#efeece"
-        android:textColor="#75571A"
+        android:fontFamily="serif-monospace"
         android:text="LOG OUT"
-         />
+        android:textColor="#75571A" />
 
 </RelativeLayout>
