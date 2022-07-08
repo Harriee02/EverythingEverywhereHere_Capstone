@@ -48,15 +48,15 @@
 
     <TextView
         android:id="@+id/txtPrice"
-        android:fontFamily="serif-monospace"
-        android:layout_width="74dp"
-        android:textStyle="bold"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="26dp"
         android:layout_below="@+id/txtRatings"
         android:layout_marginStart="2dp"
         android:layout_marginTop="1dp"
         android:layout_toEndOf="@+id/productImg"
-        android:hint="$Price" />
+        android:fontFamily="serif-monospace"
+        android:hint="$Price"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtFromStore"

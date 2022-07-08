@@ -2,6 +2,7 @@ package com.example.everythingeverywherehere.fragments;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +41,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -55,6 +60,7 @@ public class SearchFragment extends Fragment {
     TextView textView;
     Button searchBtn;
     String searchText;
+    ImageView filter;
     RecyclerView recyclerViewSearch;
     List<ProductModel> allProducts;
     ProductAdapter adapter;
@@ -72,37 +78,92 @@ public class SearchFragment extends Fragment {
         searchView = v.findViewById(R.id.searchView);
         textView = v.findViewById(R.id.textView);
         searchBtn = v.findViewById(R.id.searchBtn);
+        filter = v.findViewById(R.id.filter);
         progressBar = v.findViewById(R.id.progressBar);
         searchView.clearFocus();
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOptionsDialog();
+            }
+        });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mockListProducts();
-                queryProducts();
+                //condition to check is search text is empty, shows the progress bar, and retracts the keyboard!
+                allProducts.clear();
+                searchText = searchView.getQuery().toString().toLowerCase(Locale.ROOT);
+                if (searchText.length() == 0) {
+                    Toast.makeText(getActivity(), "Product name cannot be an empty string. Populate search view!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                progressBar.setVisibility(View.VISIBLE);
                 searchView.setQuery("", true);
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 
+//                mockListProducts();
+                // fetch products from APIs
+                queryProducts();
+                queryWalmartProducts();
             }
         });
         return v;
     }
 
+    private void showOptionsDialog() {
+        final String[] filters = {"Low->High", "High->Low", "Rating"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Choose Filter");
+        builder.setSingleChoiceItems(filters, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    dialog.dismiss();
+                    Collections.sort(allProducts, new Comparator<ProductModel>() {
+                        @Override
+                        public int compare(ProductModel o1, ProductModel o2) {
+                            return Float.compare(o1.getPrice().getValue(), o2.getPrice().getValue());
+                        }
+                    });
+                    adapter.notifyDataSetChanged();
+                } else {
+                    if (which == 1) {
+                        // desending order
+                        dialog.dismiss();
+                        Collections.sort(allProducts, new Comparator<ProductModel>() {
+                            @Override
+                            public int compare(ProductModel o1, ProductModel o2) {
+                                return Float.compare(o2.getPrice().getValue(), o1.getPrice().getValue());
+                            }
+                        });
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        //rating order
+                        dialog.dismiss();
+                        Collections.sort(allProducts, new Comparator<ProductModel>() {
+                            @Override
+                            public int compare(ProductModel o1, ProductModel o2) {
+                                return Float.compare(o2.getRating(), o1.getRating());
+                            }
+                        });
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+
+            }
+        });
+        builder.show();
+    }
+
     private void queryProducts() {
-        allProducts.clear();
-        searchText = searchView.getQuery().toString().toLowerCase(Locale.ROOT);
-        if (searchText.length() == 0) {
-            Toast.makeText(getActivity(), "Product name cannot be an empty string. Populate search view!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        progressBar.setVisibility(View.VISIBLE);
-        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.rainforestapi.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         Map<String, Object> map = new HashMap<>();
         map.put("search_term", searchText);
-        queryWalmartProducts();
         MyAPICall myAPICall = retrofit.create(MyAPICall.class);
         Call<ResponseBody> call = myAPICall.getProducts(map);
         call.enqueue(new Callback<ResponseBody>() {
@@ -114,9 +175,7 @@ public class SearchFragment extends Fragment {
                     JSONArray products = jsonObject.getJSONArray("search_results");
                     Type listType = new TypeToken<List<ProductModel>>() {
                     }.getType();
-                    allProducts.addAll(new Gson().fromJson(String.valueOf(products), listType));
-                    adapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.GONE);
+                    onSearchResultsReady(new Gson().fromJson(String.valueOf(products), listType));
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
@@ -161,7 +220,6 @@ public class SearchFragment extends Fragment {
                 try {
                     String responsee = response.body().string();
                     JSONObject jsonObject = new JSONObject(responsee);
-                    DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
                     JSONArray products = jsonObject.getJSONArray("organic_results");
                     List<ProductModel> productList = new ArrayList<>();
                     for (int i = 0; i < products.length(); i++) {
@@ -173,12 +231,12 @@ public class SearchFragment extends Fragment {
                         String link = product.getLink();
                         String imageUrl = product.getThumbnail();
                         float rating = product.getRating();
-                        Log.i("searchFRAGMENT", product.toString());
                         Price price = new Price();
                         float newPrice = product.getPrice().getOfferPrice();
                         String stringPrice = Float.toString(newPrice);
                         price.setRaw(stringPrice);
-                        Log.i("searchFRAGMENT", price.getRaw());
+                        price.setValue(newPrice);
+
                         ProductModel productModel = new ProductModel();
                         productModel.setTitle(title);
                         productModel.setLink(link);
@@ -186,13 +244,12 @@ public class SearchFragment extends Fragment {
                         productModel.setRating(rating);
                         productModel.setPrice(price);
                         productModel.setRatings_total(-123);
-                        productList.add(productModel);
+                        if (!price.getRaw().equals("0.0")) {
+                            productList.add(productModel);
+                        }
 
                     }
-                    allProducts.addAll(productList);
-                    Gson gson = new Gson();
-                    String json = gson.toJson(allProducts);
-                    boolean b = dataBaseHelper.addProduct(searchText, json);
+                    onSearchResultsReady(productList);
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
@@ -206,6 +263,22 @@ public class SearchFragment extends Fragment {
             }
         });
 
+    }
+
+    public void onSearchResultsReady(List<ProductModel> productmodel) {
+        if (allProducts.isEmpty()) {
+            allProducts.addAll(productmodel);
+        } else {
+            allProducts.addAll(productmodel);
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
+            Collections.sort(allProducts);
+            Gson gson = new Gson();
+            String json = gson.toJson(allProducts);
+            boolean b = dataBaseHelper.addProduct(searchText, json);
+            adapter.notifyDataSetChanged();
+            progressBar.setVisibility(View.GONE);
+
+        }
     }
 
 }

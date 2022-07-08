@@ -1,11 +1,13 @@
 package com.example.everythingeverywherehere;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
 
 @Parcel
-public class ProductModel {
+public class ProductModel implements Comparable<ProductModel>{
     private String title;
     private String asin;
     private String link;
@@ -82,5 +84,10 @@ public class ProductModel {
 
     public void setPrice(Price priceObject) {
         this.price = priceObject;
+    }
+
+    @Override
+    public int compareTo(@NonNull ProductModel o) {
+        return Float.compare(this.getPrice().getValue(), o.getPrice().getValue());
     }
 }
