@@ -6,7 +6,7 @@ This apps fetches product data from multiple ecommerce stores so users can easil
 
 App Evaluation
 
-**Category: **eCommerce
+**Category:** eCommerce
 
 **Mobile:** This app would be primarily developed for mobile but would perhaps be just as viable on a computer, such as tinder or other similar apps. 
 
