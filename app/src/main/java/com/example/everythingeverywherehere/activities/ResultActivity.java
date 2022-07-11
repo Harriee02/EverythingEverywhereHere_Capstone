@@ -37,17 +37,15 @@ public class ResultActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         allProducts = new ArrayList<>();
         adapter = new ProductAdapter(this, allProducts);
-        Log.i("RESULT", "" + adapter);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        String keyword = Parcels.unwrap(getIntent().getParcelableExtra("keyword"));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // shows the back button on the action bar.
+        String keyword = Parcels.unwrap(getIntent().getParcelableExtra("keyword"));// unwraps data wrapped in the HomeListAdapter.
         DataBaseHelper dataBaseHelper = new DataBaseHelper(ResultActivity.this);
-        String listJsonArray = dataBaseHelper.getDataById(keyword);
+        String listJsonArray = dataBaseHelper.getDataById(keyword); // gets data from the database.
         Type listType = new TypeToken<List<ProductModel>>() {
         }.getType();
         allProducts.addAll(new Gson().fromJson(listJsonArray, listType));
-        Log.i("RESULT", "" + allProducts);
         adapter.notifyDataSetChanged();
 
 

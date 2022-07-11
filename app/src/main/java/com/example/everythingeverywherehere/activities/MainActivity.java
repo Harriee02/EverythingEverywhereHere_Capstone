@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new UserFragment();
                             break;
                     }
+                    // this starts the three fragments added to this activity.
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
                     return true;
                 }

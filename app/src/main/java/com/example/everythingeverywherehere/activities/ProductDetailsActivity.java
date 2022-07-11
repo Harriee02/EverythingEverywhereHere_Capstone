@@ -35,7 +35,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_details);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // this shows the back button on the action bar.
 
         productDetailsImg = findViewById(R.id.productDetailsImg);
         productDetailsDescription = findViewById(R.id.productDetailsDescription);
@@ -43,7 +43,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productDetailsPrice = findViewById(R.id.productDetailsPrice);
         productDetailsRating = findViewById(R.id.productDetailsRating);
         buyNowBtn = findViewById(R.id.buyNowBtn);
-        productModel = Parcels.unwrap(getIntent().getParcelableExtra("product details"));
+        productModel = Parcels.unwrap(getIntent().getParcelableExtra("product details"));// this unwraps data wrapped by parcel in the adapter.
         String url = productModel.getLink();
         buyNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,12 +66,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
+    //allows for a url to be clickable.
     private void goToUrl(String s) {
         Uri uri = Uri.parse(s);
         Intent i = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(i);
     }
 
+    // this allows for the back button on the action bar to function properly.
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();

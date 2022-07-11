@@ -87,22 +87,22 @@ public class SearchFragment extends Fragment {
                 showOptionsDialog();
             }
         });
+        // onclicklister on the search button to enable users search for a product
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //condition to check is search text is empty, shows the progress bar, and retracts the keyboard!
                 allProducts.clear();
                 searchText = searchView.getQuery().toString().toLowerCase(Locale.ROOT);
+                //condition to check is search text is empty and shows the progress bar.
                 if (searchText.length() == 0) {
                     Toast.makeText(getActivity(), "Product name cannot be an empty string. Populate search view!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
                 searchView.setQuery("", true);
+                // next two lines retract the keyboard.
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-
-//                mockListProducts();
                 // fetch products from APIs
                 queryProducts();
                 queryWalmartProducts();
@@ -110,7 +110,7 @@ public class SearchFragment extends Fragment {
         });
         return v;
     }
-
+    // this method handles the dialog for the filters.
     private void showOptionsDialog() {
         final String[] filters = {"Low->High", "High->Low", "Rating"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -118,7 +118,7 @@ public class SearchFragment extends Fragment {
         builder.setSingleChoiceItems(filters, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) {
+                if (which == 0) { // this orders the list in ascending order
                     dialog.dismiss();
                     Collections.sort(allProducts, new Comparator<ProductModel>() {
                         @Override
@@ -128,8 +128,7 @@ public class SearchFragment extends Fragment {
                     });
                     adapter.notifyDataSetChanged();
                 } else {
-                    if (which == 1) {
-                        // desending order
+                    if (which == 1) { // this orders the list in descending order.
                         dialog.dismiss();
                         Collections.sort(allProducts, new Comparator<ProductModel>() {
                             @Override
@@ -139,8 +138,7 @@ public class SearchFragment extends Fragment {
                         });
                         adapter.notifyDataSetChanged();
 
-                    } else {
-                        //rating order
+                    } else { // this orders the list based on rating.
                         dialog.dismiss();
                         Collections.sort(allProducts, new Comparator<ProductModel>() {
                             @Override
@@ -156,7 +154,7 @@ public class SearchFragment extends Fragment {
         });
         builder.show();
     }
-
+    // this method calls the Amazon API and queries the products.
     private void queryProducts() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.rainforestapi.com/")
@@ -204,7 +202,7 @@ public class SearchFragment extends Fragment {
         allProducts.addAll(new Gson().fromJson(mockData, listType));
 
     }
-
+    // this method queries the products from the Walmart API call.
     private void queryWalmartProducts() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://serpapi.com/")
@@ -236,7 +234,7 @@ public class SearchFragment extends Fragment {
                         String stringPrice = Float.toString(newPrice);
                         price.setRaw(stringPrice);
                         price.setValue(newPrice);
-
+                        // these next lines convert a WalmartProductModel object to a ProductModel class.
                         ProductModel productModel = new ProductModel();
                         productModel.setTitle(title);
                         productModel.setLink(link);
@@ -244,6 +242,7 @@ public class SearchFragment extends Fragment {
                         productModel.setRating(rating);
                         productModel.setPrice(price);
                         productModel.setRatings_total(-123);
+                        // this condition prevents the addition of a product to the productList whose price is $0.0
                         if (!price.getRaw().equals("0.0")) {
                             productList.add(productModel);
                         }
@@ -264,8 +263,9 @@ public class SearchFragment extends Fragment {
         });
 
     }
-
+    // this method is only called at the conclusion of both API calls.
     public void onSearchResultsReady(List<ProductModel> productmodel) {
+        // this condition prevents certain methods to be called on allProducts until both API calls have ended.
         if (allProducts.isEmpty()) {
             allProducts.addAll(productmodel);
         } else {
