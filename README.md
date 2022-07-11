@@ -79,3 +79,20 @@ User -> Shows users details.
 Here's a view of implemented user stories:
 
 <img src='/Screen Shot 2022-07-11 at 4.png' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
+**Login Page**
+
+For a login action:
+
+HTTP Verb             Example
+
+GET                   Fetching the user's login details
+
+For a signup action:
+HTTP Verb             Example
+POST                  Creating and storing a new user
+
+**Home Page**
+HTTP Verb             Example
+GET                   Fetching all the products from the stores API. Posted on the search fragment.
