@@ -33,17 +33,18 @@ public class UserFragment extends Fragment {
         txtWrittenEmail.setText(user.getEmail());
         logoutBtn = v.findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 logout();
             }
-
         });
         return v;
     }
 
     private void logout() {
         ParseUser.logOutInBackground(new LogOutCallback() {
+
             @Override
             public void done(ParseException e) {
                 if (e == null) {
@@ -53,7 +54,6 @@ public class UserFragment extends Fragment {
                     getActivity().getSupportFragmentManager().popBackStack();
                 }
             }
-
         });
     }
 }

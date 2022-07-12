@@ -4,7 +4,6 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +22,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.everythingeverywherehere.APICallWalmart;
+import com.example.everythingeverywherehere.apiCalls.APICallWalmart;
 import com.example.everythingeverywherehere.DataBaseHelper;
-import com.example.everythingeverywherehere.MyAPICall;
-import com.example.everythingeverywherehere.Price;
-import com.example.everythingeverywherehere.ProductModel;
+import com.example.everythingeverywherehere.apiCalls.APICallAmazon;
+import com.example.everythingeverywherehere.models.Price;
+import com.example.everythingeverywherehere.models.ProductModel;
 import com.example.everythingeverywherehere.R;
 import com.example.everythingeverywherehere.adapters.ProductAdapter;
 import com.example.everythingeverywherehere.models.ProductModelWalmart;
@@ -82,6 +81,7 @@ public class SearchFragment extends Fragment {
         progressBar = v.findViewById(R.id.progressBar);
         searchView.clearFocus();
         filter.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 showOptionsDialog();
@@ -89,6 +89,7 @@ public class SearchFragment extends Fragment {
         });
         // onclicklister on the search button to enable users search for a product
         searchBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 allProducts.clear();
@@ -110,17 +111,49 @@ public class SearchFragment extends Fragment {
         });
         return v;
     }
+
     // this method handles the dialog for the filters.
     private void showOptionsDialog() {
         final String[] filters = {"Low->High", "High->Low", "Rating"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose Filter");
         builder.setSingleChoiceItems(filters, 0, new DialogInterface.OnClickListener() {
+
             @Override
             public void onClick(DialogInterface dialog, int which) {
+//                switch(which){
+//                    case 0:
+//                        dialog.dismiss();
+//                        Collections.sort(allProducts, new Comparator<ProductModel>() {
+//                            @Override
+//                            public int compare(ProductModel o1, ProductModel o2) {
+//                                return Float.compare(o1.getPrice().getValue(), o2.getPrice().getValue());
+//                            }
+//                        });
+//                        adapter.notifyDataSetChanged();
+//                    case 1:
+//                        dialog.dismiss();
+//                        Collections.sort(allProducts, new Comparator<ProductModel>() {
+//                            @Override
+//                            public int compare(ProductModel o1, ProductModel o2) {
+//                                return Float.compare(o2.getPrice().getValue(), o1.getPrice().getValue());
+//                            }
+//                        });
+//                        adapter.notifyDataSetChanged();
+//                    case 2:
+//                        dialog.dismiss();
+//                        Collections.sort(allProducts, new Comparator<ProductModel>() {
+//                            @Override
+//                            public int compare(ProductModel o1, ProductModel o2) {
+//                                return Float.compare(o2.getRating(), o1.getRating());
+//                            }
+//                        });
+//                        adapter.notifyDataSetChanged();
+//                }
                 if (which == 0) { // this orders the list in ascending order
                     dialog.dismiss();
                     Collections.sort(allProducts, new Comparator<ProductModel>() {
+
                         @Override
                         public int compare(ProductModel o1, ProductModel o2) {
                             return Float.compare(o1.getPrice().getValue(), o2.getPrice().getValue());
@@ -131,6 +164,7 @@ public class SearchFragment extends Fragment {
                     if (which == 1) { // this orders the list in descending order.
                         dialog.dismiss();
                         Collections.sort(allProducts, new Comparator<ProductModel>() {
+
                             @Override
                             public int compare(ProductModel o1, ProductModel o2) {
                                 return Float.compare(o2.getPrice().getValue(), o1.getPrice().getValue());
@@ -141,6 +175,7 @@ public class SearchFragment extends Fragment {
                     } else { // this orders the list based on rating.
                         dialog.dismiss();
                         Collections.sort(allProducts, new Comparator<ProductModel>() {
+
                             @Override
                             public int compare(ProductModel o1, ProductModel o2) {
                                 return Float.compare(o2.getRating(), o1.getRating());
@@ -149,11 +184,11 @@ public class SearchFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                     }
                 }
-
             }
         });
         builder.show();
     }
+
     // this method calls the Amazon API and queries the products.
     private void queryProducts() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -162,9 +197,10 @@ public class SearchFragment extends Fragment {
                 .build();
         Map<String, Object> map = new HashMap<>();
         map.put("search_term", searchText);
-        MyAPICall myAPICall = retrofit.create(MyAPICall.class);
-        Call<ResponseBody> call = myAPICall.getProducts(map);
+        APICallAmazon apiCallAmazon = retrofit.create(APICallAmazon.class);
+        Call<ResponseBody> call = apiCallAmazon.getProducts(map);
         call.enqueue(new Callback<ResponseBody>() {
+
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -177,7 +213,6 @@ public class SearchFragment extends Fragment {
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -200,8 +235,8 @@ public class SearchFragment extends Fragment {
         Type listType = new TypeToken<List<ProductModel>>() {
         }.getType();
         allProducts.addAll(new Gson().fromJson(mockData, listType));
-
     }
+
     // this method queries the products from the Walmart API call.
     private void queryWalmartProducts() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -210,9 +245,10 @@ public class SearchFragment extends Fragment {
                 .build();
         Map<String, Object> map = new HashMap<>();
         map.put("query", searchText);
-        APICallWalmart myAPICallWal = retrofit.create(APICallWalmart.class);
-        Call<ResponseBody> call = myAPICallWal.getProducts(map);
+        APICallWalmart apiCallWal = retrofit.create(APICallWalmart.class);
+        Call<ResponseBody> call = apiCallWal.getProducts(map);
         call.enqueue(new Callback<ResponseBody>() {
+
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -234,6 +270,7 @@ public class SearchFragment extends Fragment {
                         String stringPrice = Float.toString(newPrice);
                         price.setRaw(stringPrice);
                         price.setValue(newPrice);
+
                         // these next lines convert a WalmartProductModel object to a ProductModel class.
                         ProductModel productModel = new ProductModel();
                         productModel.setTitle(title);
@@ -246,13 +283,11 @@ public class SearchFragment extends Fragment {
                         if (!price.getRaw().equals("0.0")) {
                             productList.add(productModel);
                         }
-
                     }
                     onSearchResultsReady(productList);
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -261,8 +296,8 @@ public class SearchFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
             }
         });
-
     }
+
     // this method is only called at the conclusion of both API calls.
     public void onSearchResultsReady(List<ProductModel> productmodel) {
         // this condition prevents certain methods to be called on allProducts until both API calls have ended.
@@ -277,8 +312,6 @@ public class SearchFragment extends Fragment {
             boolean b = dataBaseHelper.addProduct(searchText, json);
             adapter.notifyDataSetChanged();
             progressBar.setVisibility(View.GONE);
-
         }
     }
-
 }

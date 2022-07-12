@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         passWord.setTransformationMethod(new PasswordTransformationMethod());
         checkBoxShowPwd = findViewById(R.id.checkBoxShowPwd);
         checkBoxShowPwd.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
+
             public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
                 if (isChecked) {
                     passWord.setTransformationMethod(null); // Show password when box checked
@@ -51,15 +52,16 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = findViewById(R.id.loginBtn);
         signupBtn = findViewById(R.id.signupBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String email = eMail.getText().toString();
                 String password = passWord.getText().toString();
                 loginUser(email, password);
-
             }
         });
         signupBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String email = eMail.getText().toString();
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         newUser.setPassword(password);
         newUser.setUsername(email);
         newUser.signUpInBackground(new SignUpCallback() {
+
             @Override
             public void done(ParseException e) {
                 if (e == null) {
@@ -89,7 +92,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void newUserSignUpDidNotSucceed() {
-
         Toast.makeText(LoginActivity.this, "SignUp was unsuccessful", Toast.LENGTH_SHORT).show();
     }
 
@@ -101,9 +103,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
         ParseUser.logInInBackground(email, password, new LogInCallback() {
+
             @Override
             public void done(ParseUser user, ParseException e) {
-
                 // These toasts don't work
                 if (e != null) {
                     Log.e(TAG, "Login failed");
@@ -115,7 +117,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Login was successful", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void goMainActivity() {

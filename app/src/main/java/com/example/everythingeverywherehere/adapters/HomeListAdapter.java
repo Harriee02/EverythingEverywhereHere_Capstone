@@ -28,7 +28,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         this.items = items;
     }
 
-
     @NonNull
     @Override
     public HomeListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,6 +49,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView resultBtn;
         TextView itemList;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             resultBtn = itemView.findViewById(R.id.resultBtn);
@@ -60,6 +60,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         public void bind(String item) {
             itemList.setText(item);
             itemView.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(context, ResultActivity.class);
@@ -67,9 +68,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                     context.startActivity(i);
                 }
             });
-
-
-
         }
     }
 }

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.everythingeverywherehere.activities.ProductDetailsActivity;
-import com.example.everythingeverywherehere.ProductModel;
+import com.example.everythingeverywherehere.models.ProductModel;
 import com.example.everythingeverywherehere.R;
 
 import org.parceler.Parcels;
@@ -24,7 +24,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     Context context;
     List<ProductModel> products;
     public static final String TAG = "PRODUCT_ADAPTER";
-
 
     public ProductAdapter(Context context, List<ProductModel> products) {
         this.context = context;
@@ -42,7 +41,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
         ProductModel product = products.get(position);
         holder.bind(product);
-
     }
 
     @Override
@@ -87,6 +85,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         .into(productImg);
             }
             itemView.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, ProductDetailsActivity.class);
@@ -94,10 +93,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     context.startActivity(intent);
                 }
             });
-
         }
-
-
     }
 }
 

@@ -10,12 +10,11 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.everythingeverywherehere.ProductModel;
+import com.example.everythingeverywherehere.models.ProductModel;
 import com.example.everythingeverywherehere.R;
 
 import org.parceler.Parcels;
@@ -29,7 +28,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     RatingBar productDetailsRating;
     TextView productDetailsPrice;
     Button buyNowBtn;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,10 +44,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productModel = Parcels.unwrap(getIntent().getParcelableExtra("product details"));// this unwraps data wrapped by parcel in the adapter.
         String url = productModel.getLink();
         buyNowBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 goToUrl(url);
-
             }
         });
         productDetailsDescription.setText(productModel.getTitle());
@@ -62,8 +60,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     .load(imageUrl)
                     .into(productDetailsImg);
         }
-
-
     }
 
     //allows for a url to be clickable.
@@ -80,6 +76,4 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
 }

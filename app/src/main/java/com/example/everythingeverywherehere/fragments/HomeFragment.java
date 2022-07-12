@@ -35,6 +35,7 @@ public class HomeFragment extends Fragment {
     List<String> items;
     HomeListAdapter adapter;
     RelativeLayout homeRelativeLayout;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,8 +52,4 @@ public class HomeFragment extends Fragment {
         adapter.notifyDataSetChanged();
         return v;
     }
-
-
-
-
 }

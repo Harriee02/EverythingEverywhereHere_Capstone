@@ -28,13 +28,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + SEARCHED_PRODUCT_TABLE + " (" + COLUMN_ID + " TEXT, " + COLUMN_JSON_OBJECT + " TEXT)";
         db.execSQL(createTableStatement);
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
+
     // this methods adds new products into the database and updates if the product exists in the database already.
     public boolean addProduct(String keyWord, String product) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -55,8 +54,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 return false;
             }
         }
+        db.close();
         return true;
     }
+
     // this method returns a list of the keywords.
     public List<String> getkeyWord() {
         List<String> keyWordList = new ArrayList<>();
@@ -73,14 +74,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return keyWordList;
     }
+
     // this method returns a string of JSONArray associated to a keyword.
-    public String getDataById(String id) {
+    public String getProductsPayload(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(SEARCHED_PRODUCT_TABLE, new String[]{COLUMN_ID, COLUMN_JSON_OBJECT}, COLUMN_ID + " LIKE ?", new String[]{id}, null, null, null, null);
         cursor.moveToNext();
+        db.close();
         return cursor.getString(1);
-
     }
-
 }
 

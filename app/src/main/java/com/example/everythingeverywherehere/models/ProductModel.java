@@ -1,9 +1,7 @@
-package com.example.everythingeverywherehere;
+package com.example.everythingeverywherehere.models;
 
 import androidx.annotation.NonNull;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.parceler.Parcel;
 
 @Parcel

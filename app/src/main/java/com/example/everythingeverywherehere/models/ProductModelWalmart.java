@@ -1,7 +1,5 @@
 package com.example.everythingeverywherehere.models;
 
-import com.example.everythingeverywherehere.Price;
-
 public class ProductModelWalmart {
     private String title;
     private String product_page_url;
