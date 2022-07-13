@@ -5,6 +5,7 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 
 public class ParseApplication extends Application {
+
     @Override
     public void onCreate() {
         super.onCreate();

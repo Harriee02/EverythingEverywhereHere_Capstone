@@ -22,8 +22,8 @@ import com.parse.SignUpCallback;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LOGIN_ACTIVITY";
-    private EditText eMail;
-    private EditText passWord;
+    EditText eMail;
+    EditText passWord;
     Button loginBtn;
     Button signupBtn;
     CheckBox checkBoxShowPwd;
@@ -32,11 +32,16 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+
         if (ParseUser.getCurrentUser() != null) {
             goMainActivity();
         }
+
         eMail = findViewById(R.id.txtEmail);
         passWord = findViewById(R.id.txtPassword);
+        loginBtn = findViewById(R.id.loginBtn);
+        signupBtn = findViewById(R.id.signupBtn);
+
         passWord.setTransformationMethod(new PasswordTransformationMethod());
         checkBoxShowPwd = findViewById(R.id.checkBoxShowPwd);
         checkBoxShowPwd.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
@@ -49,8 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         } );
-        loginBtn = findViewById(R.id.loginBtn);
-        signupBtn = findViewById(R.id.signupBtn);
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -60,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(email, password);
             }
         });
+
         signupBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -72,6 +77,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method is called when the "sign up' button is clicked. It creates a new ParseUser object that is a new user trying to signup.
+     * @param email This is the email the user is trying to signup with.
+     * @param password The password typed in by the user to protect their new account
+     */
     private void signUpUser(String email, String password) {
         ParseUser newUser = new ParseUser();
         newUser.setEmail(email);
@@ -91,16 +101,27 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method is called if a sign up action was not successful.
+     */
     private void newUserSignUpDidNotSucceed() {
         Toast.makeText(LoginActivity.this, "SignUp was unsuccessful", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * This method is called upon a successful sign up.
+     */
     private void newUserSignedUpSuccessfully() {
         Toast.makeText(LoginActivity.this, "SignUp was successful", Toast.LENGTH_SHORT).show();
         eMail.setText("");
         passWord.setText("");
     }
 
+    /**
+     * This method is called when a login action is attempted. The built in logInBackground method in Parse is called to verify the login in details provided by the user.
+     * @param email Provided by the user to login in, such email should have been used to sign up previously.
+     * @param password Provided by the user, and must be accurately inputted to access the account.
+     */
     private void loginUser(String email, String password) {
         ParseUser.logInInBackground(email, password, new LogInCallback() {
 
@@ -119,6 +140,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * This method starts an intent to go into the main activity of the app.
+     */
     private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);

@@ -24,6 +24,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context, "searchedProducts.db", null, 1);
     }
 
+    /**
+     * This method initializes the database in SQLite if it hasn't been created.
+     * @param db this is a SQLiteDatabase object.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE " + SEARCHED_PRODUCT_TABLE + " (" + COLUMN_ID + " TEXT, " + COLUMN_JSON_OBJECT + " TEXT)";
@@ -34,7 +38,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    // this methods adds new products into the database and updates if the product exists in the database already.
+    /**
+     * This method is called when the new keyword and associated product is to be added to the db. In a case where the keyword exists in the db, the db updates itself with the new products.
+     * @param keyWord This is the ID which the data is stored with. its type is String. To access data, the keyWord is used to identify them.
+     * @param product This is a string of a JSONArray, which contains JSONObjects containing product details.
+     * @return return value is a boolean.
+     */
     public boolean addProduct(String keyWord, String product) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -42,7 +51,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ID, keyWord);
         cv.put(COLUMN_JSON_OBJECT, product);
         String queryString = "SELECT * FROM " + SEARCHED_PRODUCT_TABLE;
+
         Cursor cursor = db.query(SEARCHED_PRODUCT_TABLE, new String[]{COLUMN_ID, COLUMN_JSON_OBJECT}, COLUMN_ID + " LIKE ?", new String[]{keyWord}, null, null, null, null);
+
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToNext();
             Log.i("HELPER", "" + cursor.getString(0));
@@ -58,9 +69,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    // this method returns a list of the keywords.
+    /**
+     * This method is called in order to get the list of keywords present in the database.
+     * @return A list containing strings.
+     */
     public List<String> getkeyWord() {
         List<String> keyWordList = new ArrayList<>();
+
         String queryString = "SELECT * FROM " + SEARCHED_PRODUCT_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
@@ -75,7 +90,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return keyWordList;
     }
 
-    // this method returns a string of JSONArray associated to a keyword.
+    /**
+     * This methods gets the string of products associated with the a key word.
+     * @param id This is the keyword for which the products associated with it is returned.
+     * @return
+     */
     public String getProductsPayload(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(SEARCHED_PRODUCT_TABLE, new String[]{COLUMN_ID, COLUMN_JSON_OBJECT}, COLUMN_ID + " LIKE ?", new String[]{id}, null, null, null, null);

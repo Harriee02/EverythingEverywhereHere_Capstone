@@ -30,18 +30,25 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
+
         recyclerView = findViewById(R.id.recyclerView);
+
         allProducts = new ArrayList<>();
         adapter = new ProductAdapter(this, allProducts);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // shows the back button on the action bar.
+
         String keyword = Parcels.unwrap(getIntent().getParcelableExtra("keyword"));// unwraps data wrapped in the HomeListAdapter.
+
         DataBaseHelper dataBaseHelper = new DataBaseHelper(ResultActivity.this);
         String listJsonArray = dataBaseHelper.getProductsPayload(keyword); // gets data from the database.
         Type listType = new TypeToken<List<ProductModel>>() {
         }.getType();
         allProducts.addAll(new Gson().fromJson(listJsonArray, listType));
+
         adapter.notifyDataSetChanged();
     }
 }

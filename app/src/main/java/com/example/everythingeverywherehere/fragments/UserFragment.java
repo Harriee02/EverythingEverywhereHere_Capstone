@@ -29,9 +29,10 @@ public class UserFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_user, container, false);
         txtWrittenEmail = v.findViewById(R.id.txtWrittenEmail);
         txtHiddenPassword = v.findViewById(R.id.txtHiddenPassword);
+        logoutBtn = v.findViewById(R.id.logoutBtn);
         ParseUser user = ParseUser.getCurrentUser();
         txtWrittenEmail.setText(user.getEmail());
-        logoutBtn = v.findViewById(R.id.logoutBtn);
+
         logoutBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -42,6 +43,9 @@ public class UserFragment extends Fragment {
         return v;
     }
 
+    /**
+     * This method is called when the logout button is clicked. This method called Parse's logOutInBackground method.
+     */
     private void logout() {
         ParseUser.logOutInBackground(new LogOutCallback() {
 

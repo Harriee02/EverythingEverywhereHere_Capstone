@@ -40,16 +40,22 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_home, container, false);
+
         homeRecyclerView = v.findViewById(R.id.homeRecyclerView);
         homeRelativeLayout = v.findViewById(R.id.homeRelativeLayout);
+
         items = new ArrayList<>();
         adapter = new HomeListAdapter(getActivity(), items);
+
         homeRecyclerView.setAdapter(adapter);
         homeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         List<String> everyProduct = dataBaseHelper.getkeyWord();
         items.addAll(everyProduct);
+
         adapter.notifyDataSetChanged();
+
         return v;
     }
 }
