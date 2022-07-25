@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
@@ -15,9 +17,9 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="6dp"
         android:background="@drawable/search_view_bg"
+        app:fontFamily="serif-monospace"
         app:iconifiedByDefault="false"
-        app:queryHint="Search here..."
-        app:fontFamily="serif-monospace"/>
+        app:queryHint="Search here..." />
 
     <TextView
         android:id="@+id/textView"
@@ -28,13 +30,13 @@
 
     <Button
         android:id="@+id/searchBtn"
-        android:fontFamily="serif-monospace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchView"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="6dp"
+        android:fontFamily="serif-monospace"
         android:text="Search" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -45,15 +47,15 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_below="@+id/searchBtn"
         android:layout_centerHorizontal="true"
         android:indeterminate="true"
+        android:indeterminateTint="#75571A"
         android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="#75571A"/>
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/filter"

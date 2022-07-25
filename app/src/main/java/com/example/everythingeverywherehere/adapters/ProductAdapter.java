@@ -74,9 +74,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 txtFromStore.setText("Amazon");
             }
 
-            if (product.getPrice().getRaw() != null) {
-                txtPrice.setText(product.getPrice().getRaw() + " " + "USD");
-            }
+            txtPrice.setText(product.getPrice() != null ? product.getPrice().getRaw() + " " + "USD" : "0 USD");
+
             txtRatings.setText(product.getRating() + "");
             String imageUrl = product.getImage();
             if (imageUrl != null) {

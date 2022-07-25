@@ -1,5 +1,12 @@
 package com.example.everythingeverywherehere.activities;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MenuItem;
@@ -12,10 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.everythingeverywherehere.R;
+import com.example.everythingeverywherehere.UpdateNotification;
 import com.example.everythingeverywherehere.fragments.HomeFragment;
 import com.example.everythingeverywherehere.fragments.SearchFragment;
 import com.example.everythingeverywherehere.fragments.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 

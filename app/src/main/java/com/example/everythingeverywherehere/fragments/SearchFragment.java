@@ -1,9 +1,15 @@
 package com.example.everythingeverywherehere.fragments;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
+import static android.content.Context.JOB_SCHEDULER_SERVICE;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.everythingeverywherehere.ExampleJobService;
 import com.example.everythingeverywherehere.apiCalls.APICallWalmart;
 import com.example.everythingeverywherehere.DataBaseHelper;
 import com.example.everythingeverywherehere.apiCalls.APICallAmazon;
@@ -117,6 +124,28 @@ public class SearchFragment extends Fragment {
         });
         return v;
     }
+
+    /**
+     * This method is schedules a job every 24hrs. The job it schedules updates the SQLite db, so that products in the db are
+     * as recent as possible
+     * This method has no return value.
+     */
+    public void scheduleJob(){
+        Log.i("JOB", "entered the method!");
+        ComponentName componentName = new ComponentName(getActivity(), ExampleJobService.class);
+        PersistableBundle bundle = new PersistableBundle();
+        bundle.putString("searchText",searchText);
+        JobInfo info = new JobInfo.Builder(123,componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                .setPersisted(true)
+                .setPeriodic(1 * 60 * 1000)
+                .setExtras(bundle)
+                .build();
+        Log.i("JOB", "about to schedule");
+        JobScheduler scheduler = (JobScheduler) getActivity().getSystemService(JOB_SCHEDULER_SERVICE);
+        scheduler.schedule(info);
+    }
+
 
     /**
      * This method shows an alertdialog with sorting filters.
@@ -288,7 +317,7 @@ public class SearchFragment extends Fragment {
 
     /**
      * This method checks if the two API calls have been completed and few operations on the list containing productModel objects.
-     * Takes in no Params and return no value.
+     * Takes in a list of productmodel objects.
      */
     public void onSearchResultsReady(List<ProductModel> productmodel) {
 
@@ -302,10 +331,15 @@ public class SearchFragment extends Fragment {
             DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
             Gson gson = new Gson();
             String json = gson.toJson(allProducts);
-            boolean b = dataBaseHelper.addProduct(searchText, json);
+            boolean addedProduct = dataBaseHelper.addProduct(searchText, json);
 
             adapter.notifyDataSetChanged();
             progressBar.setVisibility(View.GONE);
+            Log.i("SEARCH", addedProduct +"");
+            if (!addedProduct){
+                Log.i("JOB", "ABOUT TO CALL THE METHOD!");
+                scheduleJob();
+            }
         }
     }
 }

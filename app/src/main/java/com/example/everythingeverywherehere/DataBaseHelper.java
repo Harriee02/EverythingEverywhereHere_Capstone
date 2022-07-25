@@ -61,7 +61,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Log.i("HELPER", "" + rowAffected);
         } else {
             long insert = db.insert(SEARCHED_PRODUCT_TABLE, null, cv);
-            if (insert == -1) {
+            if (insert != -1) {
                 return false;
             }
         }

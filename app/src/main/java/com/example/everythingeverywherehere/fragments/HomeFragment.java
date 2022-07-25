@@ -28,6 +28,7 @@ import com.example.everythingeverywherehere.adapters.HomeListAdapter;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -53,6 +54,7 @@ public class HomeFragment extends Fragment {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(getActivity());
         List<String> everyProduct = dataBaseHelper.getkeyWord();
         items.addAll(everyProduct);
+        Collections.sort(items);
 
         adapter.notifyDataSetChanged();
 

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="155dp"
-        android:layout_height="155dp"
+        android:layout_width="164dp"
+        android:layout_height="161dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="94dp"
-        android:layout_marginEnd="241dp"
+        android:layout_marginEnd="230dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
         app:cardCornerRadius="150dp">
 
 
@@ -30,60 +34,59 @@
 
     <TextView
         android:id="@+id/textEmail"
-        android:fontFamily="serif-monospace"
-        android:layout_width="65dp"
-        android:layout_height="49dp"
+        android:layout_width="89dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/imageView2"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="1dp"
         android:layout_marginTop="49dp"
-        android:layout_marginEnd="341dp"
-        android:gravity="center"
+        android:layout_marginEnd="312dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center|left"
         android:text="Email:" />
 
     <TextView
         android:id="@+id/txtWrittenEmail"
-        android:fontFamily="serif-monospace"
-        android:layout_width="331dp"
-        android:layout_height="50dp"
+        android:layout_width="296dp"
+        android:layout_height="49dp"
         android:layout_below="@+id/imageView2"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="-59dp"
         android:layout_marginTop="49dp"
         android:layout_marginEnd="3dp"
+        android:fontFamily="serif-monospace"
         android:gravity="center|left"
         android:hint="Email goes here"
         android:textSize="22sp" />
 
     <TextView
         android:id="@+id/txtWrittenPassword"
-        android:fontFamily="serif-monospace"
-        android:layout_width="87dp"
-        android:layout_height="48dp"
+        android:layout_width="121dp"
+        android:layout_height="53dp"
         android:layout_below="@+id/textEmail"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="320dp"
-        android:gravity="center"
+        android:layout_marginEnd="285dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center|left"
         android:text="Password:" />
 
     <TextView
         android:id="@+id/txtHiddenPassword"
-        android:fontFamily="serif-monospace"
-        android:layout_width="309dp"
-        android:layout_height="50dp"
+        android:layout_width="288dp"
+        android:layout_height="56dp"
         android:layout_below="@+id/txtWrittenEmail"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="0dp"
+        android:fontFamily="serif-monospace"
         android:gravity="center|left"
-        android:hint="****************"
+        android:hint="**********"
         android:textSize="22sp" />
 
     <Button
         android:id="@+id/loginBtn"
-        android:fontFamily="serif-monospace"
         android:layout_width="408dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtHiddenPassword"
@@ -93,13 +96,12 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="45dp"
         android:backgroundTint="#97886e"
-        android:textColor="#F4F1F1"
+        android:fontFamily="serif-monospace"
         android:text="CHANGE EMAIL"
-         />
+        android:textColor="#F4F1F1" />
 
     <Button
         android:id="@+id/signupBtn"
-        android:fontFamily="serif-monospace"
         android:layout_width="408dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginBtn"
@@ -109,6 +111,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="45dp"
         android:backgroundTint="#97886e"
+        android:fontFamily="serif-monospace"
         android:text="CHANGE PASSWORD"
         android:textColor="#F6F6F5" />
 

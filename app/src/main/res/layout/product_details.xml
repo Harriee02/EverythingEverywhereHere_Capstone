@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <ImageView
         android:id="@+id/productDetailsImg"
@@ -44,24 +46,24 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/productDetailsRating"
         android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="297dp"
         android:fontFamily="serif-monospace"
         android:hint="ratingValue"
-        android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/productDetailsPrice"
-        android:fontFamily="serif-monospace"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/productDetailsRatingValue"
         android:layout_marginTop="0dp"
+        android:fontFamily="serif-monospace"
         android:hint="Price"
-        android:textSize="26sp" />
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buyNowBtn"
@@ -70,8 +72,8 @@
         android:layout_below="@+id/productDetailsPrice"
         android:layout_marginTop="28dp"
         android:backgroundTint="#efeece"
-        android:textColor="#75571A"
         android:fontFamily="serif-monospace"
-        android:text="BUY NOW" />
+        android:text="BUY NOW"
+        android:textColor="#75571A" />
 
 </RelativeLayout>

@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_marginBottom="20dp">
 
     <ImageView
@@ -14,13 +16,13 @@
 
     <TextView
         android:id="@+id/txtProductDescription"
-        android:fontFamily="serif-monospace"
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="2dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/productImg"
+        android:fontFamily="serif-monospace"
         android:hint="Description" />
 
     <ImageView
@@ -36,15 +38,15 @@
 
     <TextView
         android:id="@+id/txtRatings"
-        android:fontFamily="serif-monospace"
-        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtProductDescription"
         android:layout_marginStart="0dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/imageView3"
-        android:hint="Ratings" />
+        android:fontFamily="serif-monospace"
+        android:hint="Ratings"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtPrice"
@@ -60,13 +62,13 @@
 
     <TextView
         android:id="@+id/txtFromStore"
-        android:fontFamily="serif-monospace"
         android:layout_width="69dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtProductDescription"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="1dp"
+        android:fontFamily="serif-monospace"
         android:hint="Store" />
 
 </RelativeLayout>

@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
@@ -32,6 +34,9 @@
         <activity
             android:name=".activities.ResultActivity"
             android:parentActivityName=".activities.MainActivity"></activity>
+        <receiver android:name=".UpdateNotification"/>
+        <service android:name=".ExampleJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
         <activity
             android:name=".activities.MainActivity"
             android:windowSoftInputMode="adjustPan" />

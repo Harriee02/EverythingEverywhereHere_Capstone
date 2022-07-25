@@ -1,6 +1,7 @@
 package com.example.everythingeverywherehere.models;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.parceler.Parcel;
 
@@ -13,6 +14,7 @@ public class ProductModel implements Comparable<ProductModel>{
     private float rating;
     private float ratings_total;
     private boolean sponsored;
+    @Nullable
     private Price price;
 
 
@@ -86,6 +88,6 @@ public class ProductModel implements Comparable<ProductModel>{
 
     @Override
     public int compareTo(@NonNull ProductModel o) {
-        return Float.compare(this.getPrice().getValue(), o.getPrice().getValue());
+        return this.getPrice() != null && o.getPrice() != null ? Float.compare(this.getPrice().getValue(), o.getPrice().getValue()) : 0;
     }
 }
