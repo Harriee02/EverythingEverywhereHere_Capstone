@@ -12,6 +12,7 @@ import android.view.GestureDetector;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,11 +29,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
+    SwipeListener swipeListener;
+    FrameLayout frameLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        frameLayout = findViewById(R.id.fragment_container);
+//        swipeListener = new SwipeListener(frameLayout);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.main_bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
@@ -65,4 +70,67 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+    private class SwipeListener implements View.OnTouchListener{
+        GestureDetector gestureDetector;
+        int fragmentNumber = 0;
+        SwipeListener(View view){
+            int threshold = 100;
+            int velocity_threshold = 100;
+
+            GestureDetector.SimpleOnGestureListener listener =
+                    new GestureDetector.SimpleOnGestureListener(){
+                        @Override
+                        public boolean onDown(MotionEvent e) {
+                            return true;
+                        }
+
+                        @Override
+                        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                            float xDiff = e2.getX()-e1.getX();
+                            float yDiff = e2.getY() - e2.getY();
+                            try {
+                                if (Math.abs(xDiff) > Math.abs(yDiff)){
+                                    if (Math.abs(xDiff) > threshold
+                                    && Math.abs(velocityX) > velocity_threshold){
+                                        if (xDiff > 0){
+                                            if (fragmentNumber == 0 | fragmentNumber == 1){
+                                                fragmentNumber++;
+                                                if (fragmentNumber == 1){
+                                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new SearchFragment()).commit();
+                                                }
+                                                else{
+                                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new UserFragment()).commit();
+                                                }
+
+                                            }
+                                        }else{
+                                            if (fragmentNumber == 1 | fragmentNumber == 2){
+                                                fragmentNumber--;
+                                                if (fragmentNumber == 0){
+                                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();
+                                                }
+                                                else{
+                                                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new SearchFragment()).commit();
+                                                }
+
+                                            }
+                                        }
+                                        return true;
+                                    }
+                                }
+                            }catch(Exception e){
+                                e.printStackTrace();
+                            }
+                            return false;
+                        }
+                    };
+            gestureDetector = new GestureDetector(listener);
+            view.setOnTouchListener(this);
+        }
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return gestureDetector.onTouchEvent(event);
+        }
+    }
 }
