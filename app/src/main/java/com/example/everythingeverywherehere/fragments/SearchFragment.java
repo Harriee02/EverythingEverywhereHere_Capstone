@@ -283,7 +283,7 @@ public class SearchFragment extends Fragment {
                         float rating = product.getRating();
                         Price price = new Price();
                         float newPrice = product.getPrice().getOfferPrice();
-                        String stringPrice = Float.toString(newPrice);
+                        String stringPrice = "$"+Float.toString(newPrice);
                         price.setRaw(stringPrice);
                         price.setValue(newPrice);
 
