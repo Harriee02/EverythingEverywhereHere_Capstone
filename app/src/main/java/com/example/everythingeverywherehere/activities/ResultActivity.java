@@ -2,6 +2,7 @@ package com.example.everythingeverywherehere.activities;
 
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,5 +51,17 @@ public class ResultActivity extends AppCompatActivity {
         allProducts.addAll(new Gson().fromJson(listJsonArray, listType));
 
         adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * This allows for the back button on the action bar to function properly.
+     * @param item
+     * @return return value is true.
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
     }
 }

@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         items = new ArrayList<>();
         adapter = new HomeListAdapter(getActivity(), items);
 
-        swipeListener = new SwipeListener(homeRelativeLayout);
+//        swipeListener = new SwipeListener(homeRelativeLayout);
 
         homeRecyclerView.setAdapter(adapter);
         homeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
